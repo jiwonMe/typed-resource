@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Body } from '../../designsystem/Typography';
 import ActionButton from './ActionButton';
-import editIcon from '../../assets/icon/edit-small.svg';
-import trashIcon from '../../assets/icon/trash-small.svg';
 import { useState } from 'react';
 import Input from './Input';
 import Resource from '../../models/Resource';
@@ -60,11 +58,11 @@ const ResourceCard = (props: ResourceCardProps) => {
       }
       <ActionButtonWrapper>
         <ActionButton
-          icon={editIcon}
+          icon='edit_19'
           onClick={submitTitle}
         />
         <ActionButton
-          icon={trashIcon}
+          icon='trash_19'
           onClick={props.actions?.remove}
         />
       </ActionButtonWrapper>

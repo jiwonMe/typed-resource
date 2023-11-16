@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import TopBar from './TopBar';
 import { Body } from '../../designsystem/Typography';
 import ActionButton from './ActionButton';
-import closeIcon from '../../assets/icon/close-small.svg';
 import Resource from '../../models/Resource';
 
 interface ResourceViewerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'resource'> {
@@ -21,7 +20,7 @@ const ResourceViewer = (props: ResourceViewerProps) => {
         <ResourceTitle>{props.resource.name}</ResourceTitle>
         <ActionButton
           onClick={props.onClose}
-          icon={closeIcon}
+          icon='close_19'
         />
       </ResourceViewerHeader>
       <StyledIframe
