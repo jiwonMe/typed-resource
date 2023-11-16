@@ -30,3 +30,12 @@ This project is a little React project, so it has a simple structure.
   - `types`: types
   - `utils`: utility functions
   - `models`: typescript models
+
+## Future Improvements
+
+- Add tests
+- Add resource managing server
+- Add more features
+- Better image viewer
+- Some animation for better UX
+- Obey the Separation of concerns(SoC) rule more strictly
