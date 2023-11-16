@@ -3,13 +3,26 @@ import TopBar from './TopBar';
 import { Body } from '../../designsystem/Typography';
 import ActionButton from './ActionButton';
 import closeIcon from '../../assets/icon/close-small.svg';
+import Resource from '../../models/Resource';
 
-const ResourceViewer = () => {
+interface ResourceViewerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'resource'> {
+  resource: Resource | null;
+  onClose: () => void;
+}
+
+const ResourceViewer = (props: ResourceViewerProps) => {
+  if (!props.resource) {
+    return null;
+  }
+
   return (
     <ResourceViewerLayout>
       <ResourceViewerHeader>
-        <Body>URL in here</Body>
-        <ActionButton icon={closeIcon} />
+        <Body>{props.resource.name}</Body>
+        <ActionButton
+          onClick={props.onClose}
+          icon={closeIcon}
+        />
       </ResourceViewerHeader>
       ResourceViewer
     </ResourceViewerLayout>

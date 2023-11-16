@@ -3,14 +3,24 @@ import Button from './Button';
 import TopBar from './TopBar';
 import ResourceCard from './ResourceCard';
 import Input from './Input';
-import { useState } from 'react';
+import { createRef, useEffect, useRef, useState } from 'react';
+import Resource from '../../models/Resource';
+import { v4 as uuid } from 'uuid';
+import useResourceAppStore from '../../store/resourceAppStore';
 
-const ResourcePanel = () => {
+interface ResourcePanelProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const ResourcePanel = (props: ResourcePanelProps) => {
   const [urlInputToggle, setUrlInputToggle] = useState<boolean>(false);
+
+  const [urlValidation, setUrlValidation] = useState<boolean>(false);
+
+  const { resources, addResource, removeResource, updateResource, currentResourceIndex } = useResourceAppStore();
 
   const toggleUrlInput = () => {
     setUrlInputToggle(!urlInputToggle);
   }
+
 
   return (
     <ResourcePanelLayout>
@@ -22,24 +32,47 @@ const ResourcePanel = () => {
         {
           urlInputToggle &&
           <URLInputContainer>
-            <URLInput type="text" />
+            <URLInput
+              autoFocus
+              type="text"
+              placeholder="URL을 입력하세요"
+              validation={urlValidation}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  addResource({
+                    id: uuid(),
+                    type: 'url',
+                    url: e.currentTarget.value,
+                    name: e.currentTarget.value,
+                  });
+                  setUrlInputToggle(false);
+                }
+              }}
+            />
           </URLInputContainer>
         }
       </ResourcePanelHeader>
       <ResourceCardContainer>
-        <ResourceCard
-          resourceType="url"
-          resource="https://www.naver.com"
-          selected
-        />
-        <ResourceCard
-          resourceType="image"
-          resource="https://www.naver.com"
-        />
-        <ResourceCard
-          resourceType="url"
-          resource="https://www.naver.com"
-        />
+        {
+          resources.map((resource, index) => (
+            <ResourceCard
+              key={resource.id}
+              resource={resource}
+              selected={index === currentResourceIndex}
+              actions={{
+                edit: (resourcePartial) => {
+                  updateResource({
+                    ...resource,
+                    ...resourcePartial,
+                  });
+                },
+                remove: () => {
+                  removeResource(resource);
+                },
+              }}
+            />
+          ))
+        }
       </ResourceCardContainer>
     </ResourcePanelLayout>
   )
@@ -86,6 +119,7 @@ const ResourceCardContainer = styled.div`
 
 const URLInputContainer = styled.div`
   position: absolute;
+  z-index: 1;
 
   width: calc(100% - 20px);
 

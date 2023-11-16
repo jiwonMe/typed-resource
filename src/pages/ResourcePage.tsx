@@ -1,13 +1,28 @@
 import styled from 'styled-components';
 import ResourcePanel from '../components/ui/ResourcePanel';
 import ResourceViewer from '../components/ui/ResourceViewer';
+import useResourceAppStore from '../store/resourceAppStore';
 
 const ResourcePage = () => {
+  const {
+    resources,
+    addResource,
+    removeResource,
+  } = useResourceAppStore();
+
+  const { currentResourceIndex, setCurrentResourceIndex } = useResourceAppStore();
 
   return (
     <ResourcePageLayout>
       <ResourcePanel />
-      <ResourceViewer />
+      <ResourceViewer
+        resource={
+          currentResourceIndex === -1
+            ? null
+            : resources[currentResourceIndex]
+        }
+        onClose={() => setCurrentResourceIndex(-1)}
+      />
     </ResourcePageLayout>
   )
 }

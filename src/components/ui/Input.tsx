@@ -1,6 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  validation?: boolean
+  ref?: React.Ref<unknown>
+}
 const Input = (props: InputProps) => {
   return (
     <InputLayout {...props} />
@@ -9,7 +12,7 @@ const Input = (props: InputProps) => {
 
 export default Input
 
-const InputLayout = styled.input`
+const InputLayout = styled.input<InputProps>`
   // clear default styles
   background: none;
   border: none;
@@ -30,6 +33,11 @@ const InputLayout = styled.input`
   &:focus {
     outline: 1px solid var(--system-blue-50, #38A5E1);
   }
+
+  // when invalid
+  ${props => props.validation === false && css`
+    outline: 1px solid var(--system-red-50, #E15252);
+  `}
 
   font-size: 14px;
 

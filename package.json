@@ -14,11 +14,13 @@
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.1",
     "typed-design-system": "^0.0.228",
+    "uuid": "^9.0.1",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",

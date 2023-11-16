@@ -5,19 +5,34 @@ import editIcon from '../../assets/icon/edit-small.svg';
 import trashIcon from '../../assets/icon/trash-small.svg';
 import { useState } from 'react';
 import Input from './Input';
+import Resource from '../../models/Resource';
 
-interface ResourceCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  resourceType: 'url' | 'image';
-  resource: string;
+interface ResourceCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'resource'> {
+  resource: Resource;
 
   selected?: boolean;
+  actions?: {
+    edit?: (resourcePartial: Partial<Resource>) => void;
+    remove?: () => void;
+  }
 }
 
 const ResourceCard = (props: ResourceCardProps) => {
   const [titleInputToggle, setTitleInputToggle] = useState<boolean>(false);
 
+  const [title, setTitle] = useState<string>(props.resource.name);
+
   const toggleTitleInput = () => {
     setTitleInputToggle(!titleInputToggle);
+  }
+
+  const submitTitle = () => {
+    toggleTitleInput();
+    if (props.actions?.edit) {
+      props.actions.edit({
+        name: title,
+      });
+    }
   }
 
   return (
@@ -27,17 +42,30 @@ const ResourceCard = (props: ResourceCardProps) => {
       
       {
         titleInputToggle ? (
-          <ResourceTitleInput value={props.resource} />
+          <ResourceTitleInput
+            value={title}
+            onChange={(e) => {
+              setTitle(e.currentTarget.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                submitTitle();
+              }
+            }}
+          />
         ):(
-          <Body>{props.resource || 'untitled'}</Body>
+          <Body>{props.resource.name || 'untitled'}</Body>
         )
       }
       <ActionButtonWrapper>
         <ActionButton
           icon={editIcon}
-          onClick={toggleTitleInput}
+          onClick={submitTitle}
         />
-        <ActionButton icon={trashIcon} />
+        <ActionButton
+          icon={trashIcon}
+          onClick={props.actions?.remove}
+        />
       </ActionButtonWrapper>
     </ResourceCardLayout>
   )
