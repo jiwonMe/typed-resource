@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import Button from './Button';
+import TopBar from './TopBar';
 
 const ResourcePanel = () => {
   return (
     <ResourcePanelLayout>
-      Resource
+      <ResourcePanelHeader>
+        <Button>URL 추가</Button>
+        <Button>이미지 추가</Button>
+      </ResourcePanelHeader>
     </ResourcePanelLayout>
   )
 }
@@ -19,7 +24,13 @@ const ResourcePanelLayout = styled.div`
   max-width: 350px;
   width: 20vw;
 
-  background-color:#F7F7F7; // gray-94
+  background-color: var(--gray-gray-94, #F7F7F7);
 
   border-right: 1px solid #C4C4C4;
+
+  box-sizing: border-box;
 `;
+
+const ResourcePanelHeader = styled(TopBar)`
+  padding: 10px;
+`
