@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid';
 import useResourceAppStore from '../../store/resourceAppStore';
 import resourceValidationCheck from '../../utils/resourceValidationCheck';
 import Resource from '../../models/Resource';
+import useToast from './Toast';
 
 const ResourcePanel = () => {
   const [urlInputToggle, setUrlInputToggle] = useState<boolean>(false);
@@ -16,6 +17,8 @@ const ResourcePanel = () => {
   const [urlValidation, setUrlValidation] = useState<boolean>(false);
 
   const { resources, addResource, removeResource, updateResource, currentResourceIndex, setCurrentResourceIndex } = useResourceAppStore();
+
+  const { addToast } = useToast();
 
   const toggleUrlInput = () => {
     setUrlInputToggle(!urlInputToggle);
@@ -57,9 +60,10 @@ const ResourcePanel = () => {
                   };
                   const validity = await resourceValidationCheck(newResource);
                   if (validity) {
+                    addToast('이미지가 추가되었습니다.');
                     addResource(newResource);
                   } else {
-                    alert('이미지 파일이 아닙니다.');
+                    addToast('유효하지 않은 이미지입니다.');
                   }
                 }
               };
@@ -107,12 +111,13 @@ const ResourcePanel = () => {
                   resourceValidationCheck(newResource)
                     .then((validity) => {
                       if (validity) {
+                        addToast('URL이 추가되었습니다.');
                         addResource(newResource);
                         setUrlInputToggle(false);
                         setUrlValidation(false);
                         setUrlValue('');
                       } else {
-                        alert('유효하지 않은 URL입니다.');
+                        addToast('유효하지 않은 URL입니다.');
                       }});
                 }
               }}
@@ -157,6 +162,8 @@ export default ResourcePanel;
 const ResourcePanelLayout = styled.div`
   position: relative;
 
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
 
@@ -188,6 +195,15 @@ const ResourceCardContainer = styled.div`
   flex-direction: column;
   gap: 10px;
 
+  height: 100%;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  overflow-y: scroll;
   padding: 10px;
 `;
 

@@ -55,7 +55,7 @@ const ResourceCard = (props: ResourceCardProps) => {
             }}
           />
         ):(
-          <Body>{props.resource.name || 'untitled'}</Body>
+          <ResourceTitle>{props.resource.name || 'untitled'}</ResourceTitle>
         )
       }
       <ActionButtonWrapper>
@@ -109,4 +109,13 @@ const ResourceTitleInput = styled(Input)`
   transform: translateX(-8px) translateY(-8px);
 
   box-sizing: border-box;
+`;
+
+const ResourceTitle = styled(Body)`
+  width: 100%;
+  // maximum text line: 2
+  max-height: 40px;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;

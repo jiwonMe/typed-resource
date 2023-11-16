@@ -18,7 +18,7 @@ const ResourceViewer = (props: ResourceViewerProps) => {
   return (
     <ResourceViewerLayout>
       <ResourceViewerHeader>
-        <Body>{props.resource.name}</Body>
+        <ResourceTitle>{props.resource.name}</ResourceTitle>
         <ActionButton
           onClick={props.onClose}
           icon={closeIcon}
@@ -61,4 +61,11 @@ const ResourceViewerHeader = styled(TopBar)`
 const StyledIframe = styled.iframe`
   outline: none;
   border: none;
+`;
+
+const ResourceTitle = styled(Body)`
+  max-width: calc(100% - 40px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import ResourcePanel from '../components/ui/ResourcePanel';
 import ResourceViewer from '../components/ui/ResourceViewer';
 import useResourceAppStore from '../store/resourceAppStore';
+import { ToastProvider } from '../components/ui/Toast';
 
 const ResourcePage = () => {
   const {
@@ -12,15 +13,17 @@ const ResourcePage = () => {
 
   return (
     <ResourcePageLayout>
-      <ResourcePanel />
-      <ResourceViewer
-        resource={
-          currentResourceIndex === -1
-            ? null
-            : resources[currentResourceIndex]
-        }
-        onClose={() => setCurrentResourceIndex(-1)}
-      />
+      <ToastProvider>
+        <ResourcePanel />
+        <ResourceViewer
+          resource={
+            currentResourceIndex === -1
+              ? null
+              : resources[currentResourceIndex]
+          }
+          onClose={() => setCurrentResourceIndex(-1)}
+        />
+      </ToastProvider>
     </ResourcePageLayout>
   );
 };
