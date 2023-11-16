@@ -6,8 +6,6 @@ import trashIcon from '../../assets/icon/trash-small.svg';
 import { useState } from 'react';
 import Input from './Input';
 
-
-type Mode = 'view' | 'edit';
 interface ResourceCardProps extends React.HTMLAttributes<HTMLDivElement> {
   resourceType: 'url' | 'image';
   resource: string;
@@ -16,29 +14,28 @@ interface ResourceCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ResourceCard = (props: ResourceCardProps) => {
-  const [mode, setMode] = useState<Mode>('view');
+  const [titleInputToggle, setTitleInputToggle] = useState<boolean>(false);
 
-  const toggleMode = () => {
-    if (mode === 'view') {
-      setMode('edit');
-    } else {
-      setMode('view');
-    }
+  const toggleTitleInput = () => {
+    setTitleInputToggle(!titleInputToggle);
   }
 
   return (
     <ResourceCardLayout
       selected={props.selected}
     >
+      
       {
-        mode === 'view' ?
-        <Body>{props.resource || 'untitled'}</Body> :
-        <Input value={props.resource} />
+        titleInputToggle ? (
+          <ResourceTitleInput value={props.resource} />
+        ):(
+          <Body>{props.resource || 'untitled'}</Body>
+        )
       }
       <ActionButtonWrapper>
         <ActionButton
           icon={editIcon}
-          onClick={toggleMode}
+          onClick={toggleTitleInput}
         />
         <ActionButton icon={trashIcon} />
       </ActionButtonWrapper>
@@ -72,4 +69,13 @@ const ActionButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   gap: 8px;
+`
+
+const ResourceTitleInput = styled(Input)`
+  width: calc(100% + 16px);
+  height: 30px;
+
+  transform: translateX(-8px) translateY(-8px);
+
+  box-sizing: border-box;
 `

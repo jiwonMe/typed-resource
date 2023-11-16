@@ -19,10 +19,13 @@ const InputLayout = styled.input`
   outline: inherit;
 
   // custom styles
+  width: 100%;
+
   padding: 6px;
 
   border-radius: 3px;
   background: var(--gray-gray-97, #F7F7F7);
+  outline: 1px solid var(--gray-gray-90, #E5E5E5);
   
   &:focus {
     outline: 1px solid var(--system-blue-50, #38A5E1);

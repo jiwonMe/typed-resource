@@ -2,13 +2,29 @@ import styled from 'styled-components';
 import Button from './Button';
 import TopBar from './TopBar';
 import ResourceCard from './ResourceCard';
+import Input from './Input';
+import { useState } from 'react';
 
 const ResourcePanel = () => {
+  const [urlInputToggle, setUrlInputToggle] = useState<boolean>(false);
+
+  const toggleUrlInput = () => {
+    setUrlInputToggle(!urlInputToggle);
+  }
+
   return (
     <ResourcePanelLayout>
       <ResourcePanelHeader>
-        <Button>URL 추가</Button>
+        <Button
+          onClick={toggleUrlInput}
+        >URL 추가</Button>
         <Button>이미지 추가</Button>
+        {
+          urlInputToggle &&
+          <URLInputContainer>
+            <URLInput type="text" />
+          </URLInputContainer>
+        }
       </ResourcePanelHeader>
       <ResourceCardContainer>
         <ResourceCard
@@ -66,4 +82,24 @@ const ResourceCardContainer = styled.div`
   gap: 10px;
 
   padding: 10px;
+`
+
+const URLInputContainer = styled.div`
+  position: absolute;
+
+  width: calc(100% - 20px);
+
+  top: 42px;
+
+  padding: 5px; 
+  border-radius: 5px;
+  border: 1px solid var(--gray-gray-90, #E5E5E5);
+  background: var(--gray-gray-100, #FFF);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.10);
+
+  box-sizing: border-box;
+`
+
+const URLInput = styled(Input)`
+  font-size: 12px;
 `
