@@ -1,13 +1,16 @@
-function removePropFromObject<T extends Object>(obj: T, prop: keyof T): Object {
+function removePropFromObject<T extends NonNullable<unknown>>(
+  obj: T,
+  prop: keyof T
+): NonNullable<unknown> {
   const newObj = { ...obj };
   delete newObj[prop];
   return newObj as Omit<T, typeof prop>;
 }
 
-function removePropsFromObject<T extends Object>(
+function removePropsFromObject<T extends NonNullable<unknown>>(
   obj: T,
   props: (keyof T)[]
-): Object {
+): NonNullable<unknown> {
   const newObj = { ...obj };
   props.forEach((prop) => {
     delete newObj[prop];

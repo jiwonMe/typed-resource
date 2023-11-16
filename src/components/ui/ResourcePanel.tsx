@@ -19,7 +19,7 @@ const ResourcePanel = () => {
 
   const toggleUrlInput = () => {
     setUrlInputToggle(!urlInputToggle);
-  }
+  };
 
   // get image files (only .png, .jpg) from user
   const uploadImages = () => {
@@ -54,7 +54,7 @@ const ResourcePanel = () => {
                     type: 'image',
                     url: dataURL,
                     name: file.name,
-                  }
+                  };
                   const validity = await resourceValidationCheck(newResource);
                   if (validity) {
                     addResource(newResource);
@@ -62,13 +62,13 @@ const ResourcePanel = () => {
                     alert('이미지 파일이 아닙니다.');
                   }
                 }
-              }
-            }
+              };
+            };
           }
         }
       }
-    }
-  }
+    };
+  };
 
 
   return (
@@ -113,7 +113,7 @@ const ResourcePanel = () => {
                         setUrlValue('');
                       } else {
                         alert('유효하지 않은 URL입니다.');
-                    }});
+                      }});
                 }
               }}
             />
@@ -149,10 +149,10 @@ const ResourcePanel = () => {
         }
       </ResourceCardContainer>
     </ResourcePanelLayout>
-  )
-}
+  );
+};
 
-export default ResourcePanel
+export default ResourcePanel;
 
 const ResourcePanelLayout = styled.div`
   position: relative;
@@ -181,7 +181,7 @@ const ResourcePanelHeader = styled(TopBar)`
   right: 0;
 
   padding: 10px;
-`
+`;
 
 const ResourceCardContainer = styled.div`
   display: flex;
@@ -189,7 +189,7 @@ const ResourceCardContainer = styled.div`
   gap: 10px;
 
   padding: 10px;
-`
+`;
 
 const URLInputContainer = styled.div`
   position: absolute;
@@ -206,8 +206,8 @@ const URLInputContainer = styled.div`
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.10);
 
   box-sizing: border-box;
-`
+`;
 
 const URLInput = styled(Input)`
   font-size: 12px;
-`
+`;

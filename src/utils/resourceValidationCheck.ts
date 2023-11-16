@@ -2,6 +2,7 @@ import type Resource from '../models/Resource';
 
 // TODO: implement resource validation check
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const resourceValidationCheck = async (resource: Resource) => {
   // random delay to simulate network latency, 300-1000ms
   const delay = Math.floor(Math.random() * 700) + 300;

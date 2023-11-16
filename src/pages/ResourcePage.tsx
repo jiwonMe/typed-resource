@@ -22,10 +22,10 @@ const ResourcePage = () => {
         onClose={() => setCurrentResourceIndex(-1)}
       />
     </ResourcePageLayout>
-  )
-}
+  );
+};
 
-export default ResourcePage
+export default ResourcePage;
 
 const ResourcePageLayout = styled.div`
   display: flex;
@@ -36,4 +36,4 @@ const ResourcePageLayout = styled.div`
 
   background-color:#F0F0F0; // gray-94
 ;
-`
+`;

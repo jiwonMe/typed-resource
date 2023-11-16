@@ -7,10 +7,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = (props: InputProps) => {
   return (
     <InputLayout {...props} />
-  )
-}
+  );
+};
 
-export default Input
+export default Input;
 
 const InputLayout = styled.input<InputProps>`
   // clear default styles
@@ -41,4 +41,4 @@ const InputLayout = styled.input<InputProps>`
   font-size: 14px;
 
   box-sizing: border-box;
-`
+`;

@@ -10,10 +10,10 @@ const Button = (props: ButtonProps) => {
         {props.children}
       </Body>
     </ButtonLayout>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
 
 const ButtonLayout = styled.button`
   // clear default styles
@@ -40,4 +40,4 @@ const ButtonLayout = styled.button`
   &:hover {
     background: var(--gray-gray-94, #F7F7F7);
   }
-`
+`;

@@ -30,10 +30,10 @@ const ResourceViewer = (props: ResourceViewerProps) => {
         height="100%"
       />
     </ResourceViewerLayout>
-  )
-}
+  );
+};
 
-export default ResourceViewer
+export default ResourceViewer;
 
 const ResourceViewerLayout = styled.div`
   position: relative;
@@ -47,7 +47,7 @@ const ResourceViewerLayout = styled.div`
   width: 100%;
 
   background-color:#FFF; // white
-`
+`;
 
 const ResourceViewerHeader = styled(TopBar)`
   position: absolute;

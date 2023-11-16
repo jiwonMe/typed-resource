@@ -14,10 +14,10 @@ const ActionButton = (props: ActionButtonProps) => {
       {/* <TypedIcon icon={props.icon} /> */}
       <img src={props.icon} />
     </ActionButtonLayout>
-  )
-}
+  );
+};
 
-export default ActionButton
+export default ActionButton;
 
 const ActionButtonLayout = styled.button`
   // clear default styles
@@ -45,4 +45,4 @@ const ActionButtonLayout = styled.button`
   &:hover {
     background: var(--gray-gray-94, #F7F7F7);
   }
-`
+`;

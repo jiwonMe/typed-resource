@@ -5,10 +5,10 @@ interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {}
 const TopBar = (props: TopBarProps) => {
   return (
     <TopBarLayout {...props} />
-  )
-}
+  );
+};
 
-export default TopBar
+export default TopBar;
 
 const TopBarLayout = styled.div`
   display: flex;
@@ -26,4 +26,4 @@ const TopBarLayout = styled.div`
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.10);
 
   box-sizing: border-box;
-`
+`;

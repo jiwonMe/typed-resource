@@ -24,7 +24,7 @@ const ResourceCard = (props: ResourceCardProps) => {
 
   const toggleTitleInput = () => {
     setTitleInputToggle(!titleInputToggle);
-  }
+  };
 
   const submitTitle = () => {
     toggleTitleInput();
@@ -33,7 +33,7 @@ const ResourceCard = (props: ResourceCardProps) => {
         name: title,
       });
     }
-  }
+  };
 
   return (
     <ResourceCardLayout
@@ -69,10 +69,10 @@ const ResourceCard = (props: ResourceCardProps) => {
         />
       </ActionButtonWrapper>
     </ResourceCardLayout>
-  )
-}
+  );
+};
 
-export default ResourceCard
+export default ResourceCard;
 
 const ResourceCardLayout = styled.div<{
   selected?: boolean;
@@ -93,14 +93,14 @@ const ResourceCardLayout = styled.div<{
     border: 1px solid var(--system-blue-50, #38A5E1);
     background: var(--gray-gray-100, #FFF);
   `}
-`
+`;
 
 const ActionButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 8px;
-`
+`;
 
 const ResourceTitleInput = styled(Input)`
   width: calc(100% + 16px);
@@ -109,4 +109,4 @@ const ResourceTitleInput = styled(Input)`
   transform: translateX(-8px) translateY(-8px);
 
   box-sizing: border-box;
-`
+`;

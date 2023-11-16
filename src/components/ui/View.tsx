@@ -5,10 +5,10 @@ interface ViewProps extends React.HTMLAttributes<HTMLDivElement> {}
 const View = (props: ViewProps) => {
   return (
     <ViewLayout {...props} />
-  )
-}
+  );
+};
 
-export default View
+export default View;
 
 const ViewLayout = styled.div`
   display: flex;
@@ -17,5 +17,5 @@ const ViewLayout = styled.div`
   justify-content: center;
 
   width: 100%;
-`
+`;
 
