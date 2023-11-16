@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import ResourcePanel from '../components/ui/ResourcePanel';
 import ResourceViewer from '../components/ui/ResourceViewer';
 

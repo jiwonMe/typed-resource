@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Body } from '../../designsystem/Typography';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}

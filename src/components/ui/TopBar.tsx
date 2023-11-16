@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface TopBarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
