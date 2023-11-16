@@ -15,7 +15,7 @@ const ResourcePanel = (props: ResourcePanelProps) => {
 
   const [urlValidation, setUrlValidation] = useState<boolean>(false);
 
-  const { resources, addResource, removeResource, updateResource, currentResourceIndex } = useResourceAppStore();
+  const { resources, addResource, removeResource, updateResource, currentResourceIndex, setCurrentResourceIndex } = useResourceAppStore();
 
   const toggleUrlInput = () => {
     setUrlInputToggle(!urlInputToggle);
@@ -70,8 +70,14 @@ const ResourcePanel = (props: ResourcePanelProps) => {
                   removeResource(resource);
                 },
               }}
+              onClick={() => {
+                if (currentResourceIndex === index) {
+                  return;
+                }
+                setCurrentResourceIndex(index);
+              }}
             />
-          ))
+          )).reverse()
         }
       </ResourceCardContainer>
     </ResourcePanelLayout>

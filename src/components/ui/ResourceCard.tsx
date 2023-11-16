@@ -6,10 +6,10 @@ import trashIcon from '../../assets/icon/trash-small.svg';
 import { useState } from 'react';
 import Input from './Input';
 import Resource from '../../models/Resource';
+import { removePropFromObject } from '../../utils/removePropsFromObject';
 
 interface ResourceCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'resource'> {
   resource: Resource;
-
   selected?: boolean;
   actions?: {
     edit?: (resourcePartial: Partial<Resource>) => void;
@@ -37,6 +37,7 @@ const ResourceCard = (props: ResourceCardProps) => {
 
   return (
     <ResourceCardLayout
+      {...removePropFromObject(props, 'resource')}
       selected={props.selected}
     >
       
@@ -84,6 +85,8 @@ const ResourceCardLayout = styled.div<{
 
   border-radius: 10px;
   background: var(--gray-gray-100, #FFF);
+
+  border: 1px solid transparent;
 
   ${props => props.selected && css`
     border-radius: 10px;

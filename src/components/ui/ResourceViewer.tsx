@@ -24,7 +24,11 @@ const ResourceViewer = (props: ResourceViewerProps) => {
           icon={closeIcon}
         />
       </ResourceViewerHeader>
-      ResourceViewer
+      <StyledIframe
+        src={props.resource.url}
+        width="100%"
+        height="100%"
+      />
     </ResourceViewerLayout>
   )
 }
@@ -52,4 +56,9 @@ const ResourceViewerHeader = styled(TopBar)`
   right: 0;
 
   padding: 15px;
+`;
+
+const StyledIframe = styled.iframe`
+  outline: none;
+  border: none;
 `;
