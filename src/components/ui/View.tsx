@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-const View = () => {
+interface ViewProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const View = (props: ViewProps) => {
   return (
-    <div>View</div>
+    <ViewLayout {...props} />
   )
 }
 
@@ -13,5 +15,7 @@ const ViewLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
 `
 
