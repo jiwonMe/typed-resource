@@ -13,6 +13,7 @@ interface ResourcePanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 const ResourcePanel = (props: ResourcePanelProps) => {
   const [urlInputToggle, setUrlInputToggle] = useState<boolean>(false);
 
+  const [urlValue, setUrlValue] = useState<string>('');
   const [urlValidation, setUrlValidation] = useState<boolean>(false);
 
   const { resources, addResource, removeResource, updateResource, currentResourceIndex, setCurrentResourceIndex } = useResourceAppStore();
@@ -80,7 +81,15 @@ const ResourcePanel = (props: ResourcePanelProps) => {
               autoFocus
               type="text"
               placeholder="URL을 입력하세요"
-              validation={urlValidation}
+              value={urlValue}
+              onChange={(e) => {
+                setUrlValue(e.currentTarget.value);
+                // validate url: start with 'https://', 'http://'
+                const regex = /^https?:\/\//;
+                console.log(regex.test(e.currentTarget.value));
+                setUrlValidation(regex.test(e.currentTarget.value));
+              }}
+              className={urlValidation ? '' : 'invalid'}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   addResource({
@@ -90,6 +99,8 @@ const ResourcePanel = (props: ResourcePanelProps) => {
                     name: e.currentTarget.value,
                   });
                   setUrlInputToggle(false);
+                  setUrlValidation(false);
+                  setUrlValue('');
                 }
               }}
             />

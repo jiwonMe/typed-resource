@@ -1,6 +1,6 @@
 // resource store with resource actions
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 
 import type Resource from '../models/Resource';
 
@@ -14,26 +14,35 @@ interface ResourceAppState {
 }
 
 const useResourceAppStore = create<ResourceAppState>()(
-  devtools((set) => ({
-    resources: [],
-    currentResourceIndex: -1, // -1 means no resource is selected
-    setCurrentResourceIndex: (index) => set({ currentResourceIndex: index }),
-    addResource: (resource) =>
-      set((state) => ({
-        resources: [...state.resources, resource],
-      })),
-    removeResource: (resource) =>
-      set((state) => ({
-        resources: state.resources.filter((r) => r.id !== resource.id),
-      })),
+  devtools(
+    persist(
+      (set) => ({
+        resources: [],
+        currentResourceIndex: -1, // -1 means no resource is selected
+        setCurrentResourceIndex: (index) =>
+          set({ currentResourceIndex: index }),
+        addResource: (resource) =>
+          set((state) => ({
+            resources: [...state.resources, resource],
+          })),
+        removeResource: (resource) =>
+          set((state) => ({
+            resources: state.resources.filter((r) => r.id !== resource.id),
+          })),
 
-    updateResource: (resource) =>
-      set((state) => ({
-        resources: state.resources.map((r) =>
-          r.id === resource.id ? resource : r
-        ),
-      })),
-  }))
+        updateResource: (resource) =>
+          set((state) => ({
+            resources: state.resources.map((r) =>
+              r.id === resource.id ? resource : r
+            ),
+          })),
+      }),
+      {
+        name: 'resource-app-store',
+        storage: createJSONStorage(() => localStorage),
+      }
+    )
+  )
 );
 
 export default useResourceAppStore;

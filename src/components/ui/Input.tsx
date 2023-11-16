@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  validation?: boolean
+  $validation?: boolean
   ref?: React.Ref<unknown>
 }
 const Input = (props: InputProps) => {
@@ -34,10 +34,9 @@ const InputLayout = styled.input<InputProps>`
     outline: 1px solid var(--system-blue-50, #38A5E1);
   }
 
-  // when invalid
-  ${props => props.validation === false && css`
+  &.invalid {
     outline: 1px solid var(--system-red-50, #E15252);
-  `}
+  }
 
   font-size: 14px;
 
