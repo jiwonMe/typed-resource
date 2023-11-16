@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import Button from './Button';
 import TopBar from './TopBar';
 import ResourceCard from './ResourceCard';
@@ -11,9 +11,19 @@ const ResourcePanel = () => {
         <Button>이미지 추가</Button>
       </ResourcePanelHeader>
       <ResourceCardContainer>
-        <ResourceCard />
-        <ResourceCard />
-        <ResourceCard />
+        <ResourceCard
+          resourceType="url"
+          resource="https://www.naver.com"
+          selected
+        />
+        <ResourceCard
+          resourceType="image"
+          resource="https://www.naver.com"
+        />
+        <ResourceCard
+          resourceType="url"
+          resource="https://www.naver.com"
+        />
       </ResourceCardContainer>
     </ResourcePanelLayout>
   )
