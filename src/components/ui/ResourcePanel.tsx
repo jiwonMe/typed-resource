@@ -21,6 +21,48 @@ const ResourcePanel = (props: ResourcePanelProps) => {
     setUrlInputToggle(!urlInputToggle);
   }
 
+  // get image files (only .png, .jpg) from user
+  const uploadImages = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.png, .jpg';
+    input.multiple = true;
+    input.click();
+    input.onchange = (e: Event) => {
+      // get files from input
+      if (e.target && e.target instanceof HTMLInputElement) {
+        const files = e.target?.files;
+        if (files) {
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+              const image = new Image();
+              image.src = reader.result as string;
+              image.onload = () => {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                if (context) {
+                  canvas.width = image.width;
+                  canvas.height = image.height;
+                  context.drawImage(image, 0, 0);
+                  const dataURL = canvas.toDataURL('image/png');
+                  addResource({
+                    id: uuid(),
+                    type: 'image',
+                    url: dataURL,
+                    name: file.name,
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 
   return (
     <ResourcePanelLayout>
@@ -28,7 +70,9 @@ const ResourcePanel = (props: ResourcePanelProps) => {
         <Button
           onClick={toggleUrlInput}
         >URL 추가</Button>
-        <Button>이미지 추가</Button>
+        <Button
+          onClick={uploadImages}
+        >이미지 추가</Button>
         {
           urlInputToggle &&
           <URLInputContainer>
