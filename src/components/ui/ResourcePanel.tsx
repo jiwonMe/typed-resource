@@ -3,14 +3,13 @@ import Button from './Button';
 import TopBar from './TopBar';
 import ResourceCard from './ResourceCard';
 import Input from './Input';
-import { createRef, useEffect, useRef, useState } from 'react';
-import Resource from '../../models/Resource';
+import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import useResourceAppStore from '../../store/resourceAppStore';
+import resourceValidationCheck from '../../utils/resourceValidationCheck';
+import Resource from '../../models/Resource';
 
-interface ResourcePanelProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-const ResourcePanel = (props: ResourcePanelProps) => {
+const ResourcePanel = () => {
   const [urlInputToggle, setUrlInputToggle] = useState<boolean>(false);
 
   const [urlValue, setUrlValue] = useState<string>('');
@@ -41,7 +40,7 @@ const ResourcePanel = (props: ResourcePanelProps) => {
             reader.onload = () => {
               const image = new Image();
               image.src = reader.result as string;
-              image.onload = () => {
+              image.onload = async () => {
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
                 if (context) {
@@ -49,12 +48,19 @@ const ResourcePanel = (props: ResourcePanelProps) => {
                   canvas.height = image.height;
                   context.drawImage(image, 0, 0);
                   const dataURL = canvas.toDataURL('image/png');
-                  addResource({
+
+                  const newResource: Resource = {
                     id: uuid(),
                     type: 'image',
                     url: dataURL,
                     name: file.name,
-                  });
+                  }
+                  const validity = await resourceValidationCheck(newResource);
+                  if (validity) {
+                    addResource(newResource);
+                  } else {
+                    alert('이미지 파일이 아닙니다.');
+                  }
                 }
               }
             }
@@ -86,21 +92,28 @@ const ResourcePanel = (props: ResourcePanelProps) => {
                 setUrlValue(e.currentTarget.value);
                 // validate url: start with 'https://', 'http://'
                 const regex = /^https?:\/\//;
-                console.log(regex.test(e.currentTarget.value));
                 setUrlValidation(regex.test(e.currentTarget.value));
               }}
               className={urlValidation ? '' : 'invalid'}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  addResource({
+                  const newResource: Resource = {
                     id: uuid(),
                     type: 'url',
                     url: e.currentTarget.value,
                     name: e.currentTarget.value,
-                  });
-                  setUrlInputToggle(false);
-                  setUrlValidation(false);
-                  setUrlValue('');
+                  };
+
+                  resourceValidationCheck(newResource)
+                    .then((validity) => {
+                      if (validity) {
+                        addResource(newResource);
+                        setUrlInputToggle(false);
+                        setUrlValidation(false);
+                        setUrlValue('');
+                      } else {
+                        alert('유효하지 않은 URL입니다.');
+                    }});
                 }
               }}
             />

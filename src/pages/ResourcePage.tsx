@@ -6,8 +6,6 @@ import useResourceAppStore from '../store/resourceAppStore';
 const ResourcePage = () => {
   const {
     resources,
-    addResource,
-    removeResource,
   } = useResourceAppStore();
 
   const { currentResourceIndex, setCurrentResourceIndex } = useResourceAppStore();
