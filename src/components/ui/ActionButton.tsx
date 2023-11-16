@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { removePropFromObject } from '../../utils/removePropsFromObject';
 // import { TypedIcon } from 'typed-design-system';
 
-interface ActionButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   // prop type of TypedIcon;
   // icon: React.ComponentProps<typeof TypedIcon>['icon'];
   icon: string;
@@ -9,7 +10,7 @@ interface ActionButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 const ActionButton = (props: ActionButtonProps) => {
   return (
-    <ActionButtonLayout>
+    <ActionButtonLayout {...removePropFromObject(props, 'icon')}>
       {/* <TypedIcon icon={props.icon} /> */}
       <img src={props.icon} />
     </ActionButtonLayout>

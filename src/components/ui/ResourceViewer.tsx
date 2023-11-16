@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import TopBar from './TopBar';
+import { Body } from '../../designsystem/Typography';
+import ActionButton from './ActionButton';
+import closeIcon from '../../assets/icon/close-small.svg';
 
 const ResourceViewer = () => {
   return (
     <ResourceViewerLayout>
-      <ResourceViewerHeader />
+      <ResourceViewerHeader>
+        <Body>URL in here</Body>
+        <ActionButton icon={closeIcon} />
+      </ResourceViewerHeader>
       ResourceViewer
     </ResourceViewerLayout>
   )

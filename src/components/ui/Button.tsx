@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Body } from '../../designsystem/Typography';
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const Button = (props: ButtonProps) => {
   return (
